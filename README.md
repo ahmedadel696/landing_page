@@ -8,7 +8,7 @@ like scrolling clicking animation and so on.
 
 # Demo-Preview
 
-![Demo VIDEO](https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif)
+![Demo VIDEO](https://drive.google.com/file/d/1d0NoOFH6ZKZqSsHj5Zt9QOPfRqahODlV/view?usp=sharing)
 
 
 # Table of contents
