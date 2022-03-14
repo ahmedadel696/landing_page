@@ -23,10 +23,10 @@
  * 
 */
 
-var navContainer = document.getElementById('navbar__list');
-var navList = navContainer.querySelectorAll('.navSec');
-var mainSection = document.getElementsByTagName('main')[0];
-var sections = document.querySelectorAll('section');
+let navContainer = document.getElementById('navbar__list');
+let navList = navContainer.querySelectorAll('.navSec');
+let mainSection = document.getElementsByTagName('main')[0];
+let sections = document.querySelectorAll('section');
 addOnClickEventToNavSection(navList, sections);
 /**
  * End Global Variables
@@ -152,7 +152,12 @@ function clicklSectionListener(s) {
 
 function addOnClickEventToNavSection(navList, sections) {
     for (let i = 0; i < navList.length; i++) {
-        navList[i].addEventListener('click', () => clicklSectionListener(sections[i]))
+        navList[i].addEventListener('click', () => 
+        {
+            clicklSectionListener(sections[i]);
+            preventDefault();
+        }
+        )
     }
 }
 //End to add click event to nave sections
