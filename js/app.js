@@ -27,6 +27,7 @@ let navContainer = document.getElementById('navbar__list');
 let navList = navContainer.querySelectorAll('.navSec');
 let mainSection = document.getElementsByTagName('main')[0];
 let sections = document.querySelectorAll('section');
+let currentSecNav=null;
 addOnClickEventToNavSection(navList, sections);
 /**
  * End Global Variables
@@ -36,9 +37,10 @@ addOnClickEventToNavSection(navList, sections);
 
 //Start funaction that check if the section in view port or not
 function isSectionInViewPort(section) {
+
     let section_rect = section.getBoundingClientRect();
     if (section_rect.left >= 0
-        && section_rect.height >= 10
+        && section_rect.height >= 0
         && section_rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
         && section_rect.right <= (window.innerWidth || document.documentElement.clientWidth)) {
         return true;
@@ -134,18 +136,32 @@ function AddNewSection() {
 //End function that add new section to the nav section and main section 
 
 
+//scroll event 
+document.addEventListener('scroll', function (event) {
+    sections.forEach(function (s) {
+        event.preventDefault();
+        if (isSectionInViewPort(s)) {
+            let sectionNum = sectionNumber(s);
+            removeActiveClasses(navList);
+                navList[sectionNum - 1].classList.add('active');
+        }
+
+    })
+})
+
 //Start to add click event to nave sections
 
-function clicklSectionListener(s) {
+function clicklSectionListener(s,n) {
     setTimeout(() => {
         let activeNavs = navContainer.getElementsByClassName("active");
         activeNavs[0].classList.remove("active");
 
         // Set sections as active
-        this.className = this.className + " active";
-        // Scroll to section on link click
+        n.setAttribute("id","currentSec");
+        n.className = n.className + " active";
         // Scroll to anchor ID using scrollTO event
-        s.scrollIntoView(true);
+         //s.scrollIntoView(true);
+        s.scrollIntoView(true,{behavior: "smooth"});
     }, 0);
 
 }
@@ -154,7 +170,7 @@ function addOnClickEventToNavSection(navList, sections) {
     for (let i = 0; i < navList.length; i++) {
         navList[i].addEventListener('click', (event) => 
         {
-            clicklSectionListener(sections[i]);
+            clicklSectionListener(sections[i],navList[i]);
             event.preventDefault();
         }
         )
@@ -168,17 +184,7 @@ function addOnClickEventToNavSection(navList, sections) {
  *
 */
 
-//scroll event 
-document.addEventListener('scroll', function () {
-    sections.forEach(function (s) {
-        if (isSectionInViewPort(s)) {
-            let sectionNum = sectionNumber(s);
-            removeActiveClasses(navList);
-            navList[sectionNum - 1].classList.add('active');
-        }
 
-    })
-})
 
 
 
