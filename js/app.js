@@ -152,10 +152,10 @@ function clicklSectionListener(s) {
 
 function addOnClickEventToNavSection(navList, sections) {
     for (let i = 0; i < navList.length; i++) {
-        navList[i].addEventListener('click', () => 
+        navList[i].addEventListener('click', (event) => 
         {
             clicklSectionListener(sections[i]);
-            preventDefault();
+            event.preventDefault();
         }
         )
     }
